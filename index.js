@@ -22,5 +22,13 @@ app.get("/stats/:rsn", (req, res) => {
 });
 
 const server = app.listen(process.env.PORT, function(){
-  const port = server.address().port;
- console.log('We are on this port:', port);
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+      console.log(`Our app is running on port ${ PORT }`);
+  });
+});
+//  const server = app.listen(8080, function(){
+//    const port = server.address().port;
+//    console.log('We are on this port:', port);
+
+//  });
