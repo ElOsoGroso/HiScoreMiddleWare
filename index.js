@@ -21,4 +21,6 @@ app.get("/stats/:rsn", (req, res) => {
     });
 });
 
-app.listen(8080, () => console.log(`Example app listening on port ${8080}!`));
+const server = app.listen(process.env.PORT, function(){
+  const port = server.address().port;
+ console.log('We are on this port:', port);
