@@ -1,10 +1,24 @@
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
+const express = require("express");
+const hiscores = require("osrs-json-hiscores");
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+const app = express();
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
+app.get("/stats/:rsn", (req, res) => {
+  hiscores
+    .getStatsByGamemode(req.params.rsn)
+    .then(response => res.send(response))
+    .catch(err => {
+      res.status(404).send({ status: 404, error: err });
+    });
+});
+
+app.listen(8080, () => console.log(`Example app listening on port ${8080}!`));

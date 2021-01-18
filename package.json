@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "ejs": "^2.5.6",
-    "express": "^4.15.2"
+    "express": "^4.17.1",
+    "heroku": "^7.47.7",
+    "osrs-json-hiscores": "^2.3.1"
   },
   "devDependencies": {
     "got": "^11.3.0",
